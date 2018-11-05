@@ -1,4 +1,18 @@
 {
+  "name": "choiceframe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1091214370/choiceFrame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1091214370/choiceFrame/issues"
+  },
+  "homepage": "https://github.com/1091214370/choiceFrame#readme",
+  "description": "",
   "private": true,
   "entry": {
     "index": "./index.js"
@@ -35,5 +49,5 @@
     "lint": "eslint --ext .js,.jsx src/",
     "start": "dora --plugins webpack",
     "test": "atool-test-mocha ./**/__tests__/*-test.js"
-  }
+  },
 }
