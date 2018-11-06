@@ -1,5 +1,5 @@
-import treeTable from './components/treeTable/index';
+import TreeTable from './components/treeTable/index';
 
 export default {
-  treeTable,
+  TreeTable,
 };

@@ -5,7 +5,7 @@ import '../../static/index.less';
 
 const Search = Input.Search;
 const TreeNode = Tree.TreeNode;
-const treeTable = ({
+const TreeTable = ({
   loading, // confirmLoading
   spinning,  // 门店数加载状态
   codeName, // 编号名称
@@ -177,7 +177,7 @@ const treeTable = ({
   );
 };
 
-treeTable.propTypes = {
+TreeTable.propTypes = {
   bindModalVisible: PropTypes.bool,
   loading: PropTypes.bool,
   isTree: PropTypes.bool,
@@ -200,4 +200,4 @@ treeTable.propTypes = {
   onExpand: PropTypes.func,
 };
 
-export default treeTable;
+export default TreeTable;
