@@ -2,43 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailTable } from 'hermes-react';
 import { Form, Table, Button, Spin, Icon } from 'antd';
+import { STATE, TAKEOUTTYPE } from '../../utils/index';
 
 const OrderDetail = ({
-  loading,
-  formData,
-  orderPage,
-  onBack,
-  onPage,
+  loading, // loading
+  isOutlier, // 是否是异常单
+  formData, // 页面数据
+  onBack, // 返回
+  onPage, // 翻页
 }) => {
-  const state = {
-    0: '已提交未处理',
-    1: '生效未付款',
-    2: '已付款',
-    Y: '订单已生效',
-    N: '订单下发中',
-    3: '订单取消',
-    4: '申请退款',
-    5: '已退款',
-    6: '订单结账',
-    7: '已下单',
-    51: '骑手已接单',
-    52: '订单已送达',
-    54: '骑手取餐中',
-    55: '订单配送中',
-    56: '等待骑手接单',
-    57: '用户申请退单',
-    58: '用户取消申请退单',
-    59: '驳回申请退单',
-    60: '等待用户支付',
-    61: '百度物流下单失败',
-    '': '全部',
-  };
-  const TAKEOUTTYPE = {
-    ELEME: '饿了么',
-    MEITUAN: '美团',
-    meiTuanld: '美团录单',
-    '': '全部',
-  };
   const orderColumns = [ // 点菜列表
     {
       title: '菜品名称',
@@ -74,7 +46,7 @@ const OrderDetail = ({
     },
     {
       label: '订单来源',
-      value: TAKEOUTTYPE[formData.orderFrom],
+      value: TAKEOUTTYPE[formData.orderFrom.toUpperCase()],
     },
     {
       label: '流水号',
@@ -82,7 +54,7 @@ const OrderDetail = ({
     },
     {
       label: '订单状态',
-      value: state[formData.orderState],
+      value: STATE[formData.orderState],
     },
     {
       label: '门店编码',
@@ -152,13 +124,15 @@ const OrderDetail = ({
       label: '配送员电话',
       value: formData.deliverTele || '--',
     },
-    { //
+  ];
+  // 异常描述
+  const outlierInfo = {
       label: '异常描述',
       value: formData.exceptionReason,
       colSpan: 5,
     },
-  ];
-
+  // 如果是异常订单，增加异常描述
+  if (isOutlier) orderInformation.push(outlierInfo);
   const title = text => (<span
     style={{
       color: '#666',
@@ -183,7 +157,7 @@ const OrderDetail = ({
         <Table
           columns={orderColumns}
           dataSource={formData.dishList}
-          pagination={orderPage}
+          size="small"
           onChange={onPage}
           bordered
           rowKey={record => record.ID}
@@ -195,9 +169,9 @@ const OrderDetail = ({
 };
 OrderDetail.propTypes = {
   loading: PropTypes.bool,
+  isOutlier: PropTypes.bool,
   formData: PropTypes.object,
   onBack: PropTypes.func,
-  orderPage: PropTypes.func,
   onPage: PropTypes.func,
 };
 
